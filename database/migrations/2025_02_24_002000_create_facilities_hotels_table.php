@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('facilities_hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('type_id')->constrained('type_rooms')->onDelete('cascade');
-            $table->string('lokasi_file');
             $table->text('description');
-            $table->integer('capacity');
+            $table->string('lokasi_file');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('facilities_hotels');
     }
 };

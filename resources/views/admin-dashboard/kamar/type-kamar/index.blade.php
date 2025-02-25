@@ -46,8 +46,9 @@
                         <th class="border border-gray-300 px-4 py-2">Tipe Kamar</th>
                         <th class="border border-gray-300 px-4 py-2">Jumlah</th>
                         <th class="border border-gray-300 px-4 py-2">Fasilitas</th>
+                        <th class="border border-gray-300 px-4 py-2">Harga</th>
                         <th class="border border-gray-300 px-4 py-2">Aksi</th>
-                        <th class="border border-gray-300 px-4 py-2"></th>
+                        {{-- <th class="border border-gray-300 px-4 py-2"></th> --}}
                         
                     </tr>
                 </thead>
@@ -57,7 +58,7 @@
                     <tr class="bg-white hover:bg-gray-100 hover:cursor-pointer">
                         <td class="border border-gray-300 px-4 py-2">{{$i++}}</td>
                         <td class="border border-gray-300 px-4 py-2">{{$roomTypes->type}}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{$roomTypes->rooms->count()}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{$roomTypes->quantity}}</td>
                         <td class="border border-gray-300 px-4 py-2">
                             
                             @forelse ($roomTypes->facilities as $facility)
@@ -81,14 +82,15 @@
                             @endforelse
                         
                         </td>
+                        <td class="border border-gray-300 px-4 py-2">{{$roomTypes->price}}</td>
                         {{-- <td class="border border-gray-300 px-4 py-2">2</td>
                         <td class="border border-gray-300 px-4 py-2">2025-03-01</td>
                         <td class="border border-gray-300 px-4 py-2">2025-03-05</td>
                         <td class="border border-gray-300 px-4 py-2 text-green-600 font-semibold">Confirmed</td>
                         --}}
-                        <td class="border border-gray-300 px-4 py-2">
+                        {{-- <td class="border border-gray-300 px-4 py-2">
                             <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat</button>
-                        </td> 
+                        </td>  --}}
                         <td class="border border-gray-300 px-4 py-2">
                             <form action="{{route('admin.delete-room-type', $roomTypes->id)}}" method="POST" style="display:inline;">
                                 @csrf

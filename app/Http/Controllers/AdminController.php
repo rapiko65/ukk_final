@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\facilities;
+use App\Models\facilities_hotel;
 use App\Models\room;
 use App\Models\room_facility;
 use App\Models\type_room;
@@ -78,6 +79,7 @@ class AdminController extends Controller
     public function RoomTypeStore(Request $request){
         $request->validate([
             'type' => 'required',
+            'price' => 'required',
         ]);
 
         // $room_types = type_room::create($request->all());
@@ -99,7 +101,7 @@ class AdminController extends Controller
             'type_id' => 'required',
             'lokasi_file' => 'required|file|image|max:1024',
             'description' => 'required',
-            'price' => 'required|numeric',
+            // 'price' => 'required|numeric',
             'capacity' => 'required|integer',
         ]);
 
@@ -110,7 +112,7 @@ class AdminController extends Controller
                 'type_id' => $request->type_id,
                 'lokasi_file' => $filePath,
                 'description' => $request->description,
-                'price' => $request->price,
+                // 'price' => $request->price,
                 'capacity' => $request->capacity,
             ]);
 
@@ -124,7 +126,7 @@ class AdminController extends Controller
     {
         try {
             $room = room::find($id);
-            
+
             if (!$room) {
                 return redirect()->route('admin.rooms')->withErrors(['error' => 'Kamar tidak ditemukan.']);
             }
@@ -145,7 +147,7 @@ class AdminController extends Controller
     {
         try {
             $roomType = type_room::find($id);
-            
+
             if (!$roomType) {
                 return redirect()->route('admin.rooms')->withErrors(['error' => 'Tipe kamar tidak ditemukan.']);
             }
@@ -181,25 +183,73 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'type_rooms' => 'array', 
-            'type_rooms.*' => 'exists:type_rooms,id', 
+            'type_rooms' => 'array',
+            'type_rooms.*' => 'exists:type_rooms,id',
         ]);
-    
+
         $facilities = facilities::create($request->only(['name', 'description']));
-    
+
         if ($request->has('type_rooms')) {
             $facilities->roomTypes()->sync($request->type_rooms);
         }
-        
-    
+
+
         return redirect()->route('admin.facilities')->with('success', 'Fasilitas berhasil ditambahkan.');
+    }
+
+    public function ShowFacilitiesHotel(){
+        $facilities = facilities_hotel::all();
+        return view('admin-dashboard.facility-hotel.index', compact('facilities'));
+    }
+
+    public function CreateFacilitiesHotel(){
+        return view('admin-dashboard.facility-hotel.create');
+    }
+
+    public function StoreFacilitiesHotel(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'lokasi_file' => 'required', // Add image validation
+        ]);
+
+        try {
+            $filePath = $request->file('lokasi_file')->store('facility_images', 'public');
+            
+            $facilities = facilities_hotel::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'lokasi_file' => $filePath,
+            ]);
+
+            return redirect()->route('admin.facilities-hotel')->with('success', 'Fasilitas berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.facilities-hotel')->withErrors(['error' => 'Terjadi kesalahan saat menyimpan fasilitas.']);
+        }
+    }
+
+    public function DestroyFacilitiesHotel($id)
+    {
+        try {
+            $facility = facilities_hotel::find($id);
+
+            if (!$facility) {
+                return redirect()->route('admin.facilities')->withErrors(['error' => 'Fasilitas tidak ditemukan.']);
+            }
+
+            $facility->delete();
+
+            return redirect()->route('admin.facilities')->with('success', 'Fasilitas berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.facilities')->withErrors(['error' => 'Terjadi kesalahan saat menghapus fasilitas: ']);
+        }
     }
 
     public function DestroyFacilities($id)
     {
         try {
             $facility = facilities::find($id);
-            
+
             if (!$facility) {
                 return redirect()->route('admin.facilities')->withErrors(['error' => 'Fasilitas tidak ditemukan.']);
             }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\RegisterController as ControllersRegisterController;
 use App\Http\Controllers\ResepsionisController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //     return view('admin-dashboard.index');
 // });
 
+
 Route::prefix('dashboard-admin')->name('admin.')->group(function () {
     //dashboard
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -57,11 +59,22 @@ Route::prefix('dashboard-admin')->name('admin.')->group(function () {
     Route::get('create-facility', [AdminController::class, 'CreateFacilities'])->name('create-facility');
     Route::post('store-facility', [AdminController::class, 'StoreFacilities'])->name('store-facility');
     Route::delete('delete-facility/{id}', [AdminController::class, 'DestroyFacilities'])->name('delete-facility');
+    Route::get('facilities-hotel', [AdminController::class, 'ShowFacilitiesHotel'])->name('facilities-hotel');
+    Route::get('create-facility-hotel', [AdminController::class, 'CreateFacilitiesHotel'])->name('create-facility-hotel');
+    Route::post('store-facility-hotel', [AdminController::class, 'StoreFacilitiesHotel'])->name('store-facility-hotel');
+    Route::delete('delete-facility-hotel/{id}', [AdminController::class, 'DestroyFacilitiesHotel'])->name('delete-facility-hotel');
 });
 
 Route::prefix('dashboard-resepsionis')->name('resepsionis.')->group(function () {
     Route::get('dashboard', [ResepsionisController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('reservations',[ResepsionisController::class, 'pesanan'])->name('pesanan');
+    Route::patch('reservations/{id}/status', [ReservationController::class, 'updateStatus'])->name('reservations.updateStatus');
+    Route::delete('reservations/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 });
 
+Route::post('reservations',[ReservationController::class, 'store'])->name('reservations.store');
 
+Route::get('facilities',[MainController::class, 'facilities'])->name('facilities');
+Route::get('history/{id}',[MainController::class,'history'])->name('history');
 

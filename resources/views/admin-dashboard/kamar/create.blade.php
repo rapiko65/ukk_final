@@ -38,10 +38,10 @@
                 <label for="Tipe Kamar" class="block text-gray-700">Description</label>
                 <input type="text" name="description" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Deskripsi">
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="Tipe Kamar" class="block text-gray-700">Price</label>
                 <input type="number" name="price" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Harga">
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <label for="Tipe Kamar" class="block text-gray-700">Capacity</label>
                 <input type="number" name="capacity" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Kapasitas">

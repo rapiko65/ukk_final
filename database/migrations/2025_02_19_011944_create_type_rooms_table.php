@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('type_rooms', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->integer('quantity')->default(0);
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }

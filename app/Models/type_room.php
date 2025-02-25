@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class type_room extends Model
 {
     use HasFactory;
-    protected $table = 'type_rooms';
-    protected $fillable = ['type'];
 
-    
+    protected $table = 'type_rooms';
+    protected $fillable = ['type', 'quantity','price'];
+
     public function rooms()
     {
-        return $this->hasMany(room::class, 'type_id');
+        return $this->hasMany(Room::class, 'type_id');
     }
 
     public function facilities()
@@ -22,8 +22,14 @@ class type_room extends Model
         return $this->belongsToMany(facilities::class, 'room_facilities', 'type_id', 'facility_id');
     }
 
-    public function getRoomCountAttribute()
+    public function reservations()
     {
-        return $this->rooms()->count();
+        return $this->hasMany(reservations::class, 'type_id');
+    }
+
+    public function updateRoomCount()
+    {
+        $this->quantity = $this->rooms()->count();
+        $this->save();
     }
 }

@@ -1,5 +1,5 @@
 @extends('admin-dashboard.index')
-@section('title','Tambah Tipe Kamar')
+@section('title','Tambah Fasilitas Kamar')
 @section('content')
 <div class="container mt-5">
     @if ($errors->any())
@@ -35,17 +35,31 @@
             <i class="fa-solid fa-arrow-left mr-2"></i>
         </a>
     </div>
-        <h2 class="mb-4 text-2xl font-bold">Tambah Tipe Kamar</h2>
-        <form action="{{route('admin.store-room-type')}}" method="POST" class="space-y-4">
+        <h2 class="mb-4 text-2xl font-bold">Tambah Fasilitas Hotel</h2>
+        <form action="{{route('admin.store-facility-hotel')}}" method="POST" class="space-y-4" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="Tipe Kamar" class="block text-gray-700">Tipe Kamar</label>
-                <input type="text" name="type" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Tipe Kamar">
+                <label for="Tipe Kamar" class="block text-gray-700">Fasilitas</label>
+                <input type="text" name="name" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Fasilitas">
             </div>
             <div class="mb-3">
-                <label for="Tipe Kamar" class="block text-gray-700">Price</label>
-                <input type="number" name="price" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Harga">
+                <label for="Tipe Kamar" class="block text-gray-700">Deskripsi</label>
+                <input type="text" name="description" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Tipe Kamar" placeholder="Masukkan Fasilitas">
             </div>
+            <div class="mb-3">
+                <label for="Foto Kamar" class="block text-gray-700">Foto</label>
+                <input type="file" name="lokasi_file" accept="image/*" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="Foto Kamar">
+            </div>
+            {{-- <div class="mb-3">
+                <label class="block">Tipe Kamar yang Mendukung Fasilitas Ini</label>
+            @foreach($roomTypes as $type)
+                <div>
+                    <input type="checkbox" name="type_rooms[]" value="{{ $type->id }}">
+                    <label>{{ $type->type }}</label>
+                </div>
+            @endforeach
+            </div> --}}
+
             {{-- <div class="mb-3">
                 <label for="Tipe Kamar" class="block text-gray-700">Nama</label>
                 <input type="text" name="name" class="block w-full px-4 py-2 border-2 border-gray-300 rounded-md" id="nama" value="{{$user->name}}" placeholder="Masukkan Nama Pelanggan">

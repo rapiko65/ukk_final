@@ -4,8 +4,8 @@
 <body class="bg-gray-100 p-6">
     <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-4">Daftar Fasilitas</h2>
-         <a href="{{route('admin.create-facility')}}" class="bg-gray-700 text-white my-5 px-4 py-2 rounded">
-            Tambah Fasilitas
+         <a href="{{route('admin.create-facility-hotel')}}" class="bg-gray-700 text-white my-5 px-4 py-2 rounded">
+            Tambah Fasilitas Hotel
         </a>
         {{--
         <a href="{{route('admin.create-room')}}" class="bg-gray-700 ml-5 text-white my-5 px-4 py-2 rounded">
@@ -47,18 +47,18 @@
                         <th class="border border-gray-300 px-4 py-2">Fasilitas</th>
                         <th class="border border-gray-300 px-4 py-2">Deskripsi</th>
                         <th class="border border-gray-300 px-4 py-2">Aksi</th>
-                        {{-- <th class="border border-gray-300 px-4 py-2"></th> --}}
-                        
+                        <th class="border border-gray-300 px-4 py-2"></th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <?php $i = 1; ?>
-                    @foreach ($facility as $facilities )
-                        
+                    @foreach ($facilities as $facility )
+
                     <tr class="bg-white hover:bg-gray-100 hover:cursor-pointer">
                         <td class="border border-gray-300 px-4 py-2">{{$i++}}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{$facilities->name}}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{$facilities->description}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{$facility->name}}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{$facility->description}}</td>
                         {{-- <td class="border border-gray-300 px-4 py-2">2</td>
                         <td class="border border-gray-300 px-4 py-2">2025-03-01</td>
                         <td class="border border-gray-300 px-4 py-2">2025-03-05</td>
@@ -66,17 +66,17 @@
                         --}}
                         {{-- <td class="border border-gray-300 px-4 py-2">
                             <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button>
-                        </td>  --}}
+                        </td> --}}
                         <td class="border border-gray-300 px-4 py-2">
-                            <form action="{{route('admin.delete-facility', $facilities->id)}}" method="POST" style="display:inline;">
+                            <form action="{{route('admin.delete-facility-hotel', $facility->id)}}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
-                    
+
                             </form>
-                        </td> 
+                        </td>
                     </tr>
-                    
+
                     @endforeach
                 </tbody>
             </table>

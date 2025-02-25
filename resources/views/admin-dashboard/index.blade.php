@@ -46,6 +46,14 @@
         >
         <i class="fa-solid fa-face-smile"></i>
         </a>
+        <a
+          href="{{route('admin.facilities-hotel')}}"
+          @click="active = 'admin.facilities-hotel'"
+          :class="active === 'admin.facilities-hotel' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
+          class="text-xl p-3 rounded-lg"
+        >
+        <i class="fa-solid fa-face-smile"></i>
+        </a>
       </nav>
 
       <!-- Logout -->

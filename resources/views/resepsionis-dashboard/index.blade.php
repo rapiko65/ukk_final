@@ -22,15 +22,15 @@
         </a>
 
         <a
-          href=""
-          @click="active = 'penjualan'"
-          :class="active === 'penjualan' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
+          href="{{route('resepsionis.pesanan')}}"
+          @click="active = 'resepsionis.pesanan'"
+          :class="active === 'resepsionis.pesanan' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
           class="text-xl p-3 rounded-lg"
         >
           <i class="fa-solid fa-note-sticky"></i>
         </a>
 
-        <a
+        {{-- <a
           href=""
           @click="active = 'produk'"
           :class="active === 'produk' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
@@ -45,7 +45,7 @@
           class="text-xl p-3 rounded-lg"
         >
           <i class="fa-solid fa-users"></i>
-        </a>
+        </a> --}}
       </nav>
 
       <!-- Logout -->
